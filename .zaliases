@@ -51,4 +51,5 @@ alias aliasconfig="micro ~/.aliases"
 # Bitwarden alias
 alias bw="flatpak run --command=bw com.bitwarden.desktop"
 
-
+# VSCode
+alias code="flatpak run com.visualstudio.code"
