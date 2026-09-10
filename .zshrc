@@ -139,3 +139,7 @@ export FZF_DEFAULT_OPTS="--walker-skip=.venv,.git,.pytest_cache,.ruff_cache,__py
   --bind 'ctrl-p:toggle-preview' \
   --bind 'ctrl-e:execute(micro {})' \
   --bind 'ctrl-y:execute-silent(echo -n {} | wl-copy)'"
+
+# Inicializa os atalhos e autocompletion do fzf no Zsh
+source <(fzf --zsh)
+
