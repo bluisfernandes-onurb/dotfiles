@@ -103,7 +103,7 @@ function list-funcs() {
     }' ~/.zfunctions
 }
 
-
+# ----- PET CLI -----
 # DESC: PET CLI connect to Gist
 function  pet-sync() {
     if [[ -z "$PET_GITHUB_ACCESS_TOKEN" ]]; then
@@ -115,7 +115,6 @@ function  pet-sync() {
     pet sync    
 }
 
-# ----- PET CLI -----
 function prev() {
   PREV=$(fc -lrn | head -n 1)
   sh -c "pet new `printf %q "$PREV"`"
