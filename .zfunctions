@@ -104,13 +104,6 @@ function list-funcs() {
 }
 
 
-# DESC: BW unlock and export token
-function bw-unlock() {
-    # 1. Destrava o Bitwarden e salva o token
-    export BW_SESSION=$(bw unlock --raw)
-}
-
-
 # DESC: PET CLI connect to Gist
 function  pet-sync() {
     if [[ -z "$PET_GITHUB_ACCESS_TOKEN" ]]; then
@@ -121,7 +114,6 @@ function  pet-sync() {
     fi
     pet sync    
 }
-
 
 # ----- PET CLI -----
 function prev() {
@@ -156,8 +148,21 @@ bindkey '^n' _pet_move_cursor_to_next_parameter
 # ----- PET CLI -----
 
 # DESC: Bitwarden\tSalva sessao ativa Bitwarden
-bw-unlock() {
-  export BW_SESSION=$(bw unlock --raw)
+function bw-unlock() {
+    local master_pw token
+    printf "Master password: "
+    read -rs master_pw
+    echo ""
+
+    if token=$(printf '%s\n' "$master_pw" | bw unlock --raw) && [[ -n "$token" ]]; then
+        unset master_pw
+        export BW_SESSION="$token"
+        echo "Bitwarden destravado."
+    else
+        unset master_pw
+        echo "Falha ao destravar." >&2
+        return 1
+    fi
 }
 
 # DESC: GIT gcm='git commit -m "x"'
